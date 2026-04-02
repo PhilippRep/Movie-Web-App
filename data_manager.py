@@ -28,3 +28,7 @@ class DataManager():
         movie_to_update.title = new_title
         db.session.commit()
 
+    def delete_movie(self, movie_id):
+        movie_to_delete = Movie.query.get(movie_id)
+        db.session.delete(movie_to_delete)
+        db.session.commit()
