@@ -1,3 +1,5 @@
+from sqlalchemy.util import method_is_overridden
+
 from models import db, User, Movie
 
 
@@ -18,3 +20,7 @@ class DataManager():
         return user.movies
 
     def add_movie(self, movie):
+        db.session.add(movie)
+        db.session.commit()
+
+
