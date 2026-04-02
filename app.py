@@ -21,8 +21,9 @@ data_manager = DataManager() # Create an object of your DataManager class
 def get_movie_content(movie, user_id):
     """Takes a movie title from a user wish, search over API for the
     informations and return the movie object"""
-    url = f"http://www.omdbapi.com/?apikey={API_KEY}&"
+    url = f"http://www.omdbapi.com/"
     params = {
+        "apikey": API_KEY,
         "t": movie
     }
     response = requests.get(url, params=params)
@@ -67,7 +68,7 @@ def list_movies(user_id):
     """Wenn du auf einen Nutzernamen klickst, ruft die App die Liste der
     Lieblingsfilme dieses Nutzers ab und zeigt sie an."""
     movies = data_manager.get_movies(user_id)
-    return render_template('movies.html', movies=movies)
+    return render_template('movies.html', movies=movies, user_id=user_id)
 
 
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
@@ -84,17 +85,22 @@ def update_title(user_id, movie_id):
     ohne sich auf OMDb für Korrekturen zu verlassen."""
     updated_title = request.form.get('update_title')
     data_manager.update_movie(movie_id, updated_title)
-    return redirect(url_for('list_movies', user_id=user_id))
+    return redirect(url_for('list_movies', movie_id=movie_id, user_id=user_id))
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
 def delete_movie(user_id, movie_id):
     """Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
     data_manager.delete_movie(movie_id)
-    return redirect(url_for('list_movies', user_id=user_id))
+    return redirect(url_for('list_movies', movie_id=movie_id, user_id=user_id))
 
+@app.route('/users/<int:user_id>/delete', methods=['POST'])
+def delete_user(user_id):
+    """Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
+    data_manager.delete_user(user_id)
+    return redirect(url_for('index', user_id=user_id))
 
 
 if __name__ == '__main__':
   with app.app_context():
     db.create_all()
-  app.run()
+  app.run(debug=True)

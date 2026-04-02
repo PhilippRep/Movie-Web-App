@@ -32,3 +32,9 @@ class DataManager():
         movie_to_delete = Movie.query.get(movie_id)
         db.session.delete(movie_to_delete)
         db.session.commit()
+
+    def delete_user(self, user_id):
+        user_to_delete = User.query.get(user_id)
+        db.session.delete(user_to_delete)
+        db.session.commit()
+
