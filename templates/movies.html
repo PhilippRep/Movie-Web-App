@@ -11,11 +11,14 @@ Movies
             <a href="{{movie.poster}}" target="blank">
                 <img src="{{movie.poster}}" alt="{{movie.title}}">
                 </a>
-            <form action="{{ url_for('update_movie', movie_id=movie_id) }}" method="POST">
-                <input type="text" name="update-title" value="{{ movie.title }}">
+            <form action="{{ url_for('update_movie', movie_id=movie.id) }}" method="POST">
+                <input type="text" name="update_title" value="{{ movie.title }}">
             </form>
             <p><strong>Year:</strong>{{movie.year}}</p>
             <p><strong>Director:</strong>{{movie.director}}</p>
+            <form action="{{ url_for('delete_movie', movie_id=movie.id) }}" method="POST">
+            <button type="submit" name="delete_movie">Delete</button>
+            </form>
         </li>
         {% endfor %}
     </ul>

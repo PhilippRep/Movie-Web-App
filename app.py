@@ -79,17 +79,19 @@ def add_movie(user_id):
     return redirect(url_for('list_movies', user_id=user_id))
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/update', methods=['POST'])
-def update_titel(user_id, movie_id):
+def update_title(user_id, movie_id):
     """Den Titel eines bestimmten Films in der Liste eines Nutzers ändern,
     ohne sich auf OMDb für Korrekturen zu verlassen."""
+    updated_title = request.form.get('update_title')
+    data_manager.update_movie(movie_id, updated_title)
+    return redirect(url_for('list_movies', user_id=user_id))
 
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
+def delete_movie(user_id, movie_id):
+    """Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
+    data_manager.delete_movie(movie_id)
+    return redirect(url_for('list_movies', user_id=user_id))
 
-
-
-"""
-
-@app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST']): 
-Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
 
 
 if __name__ == '__main__':
