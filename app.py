@@ -1,7 +1,6 @@
 import os
-import requests
 from data_manager import DataManager
-from flask import Flask
+from flask import Flask, redirect, render_template, request, url_for
 from dotenv import load_dotenv
 from models import db, Movie
 
@@ -48,15 +47,23 @@ def get_movie_content(movie):
 def index():
     """Die Startseite deiner Anwendung. Zeigt eine Liste aller registrierten Nutzer und ein
     Formular zum Hinzufügen neuer Nutzer. (Diese Route verwendet standardmäßig GET."""
-    return "Welcome to MovieWeb APP"
+    users = data_manager.get_users()
+    return render_template('index.html', users=users)
 
-@app.route('/users', methods=['POST'])
+@app.route('/users', methods=['GET'])
 def list_users():
     """Wenn der Nutzer das „Nutzer hinzufügen“-Formular abschickt, wird eine POST-Anfrage ausgelöst.
     Der Server erhält die neuen Nutzerdaten, fügt sie der Datenbank hinzu und leitet dann zurück zu /.
     """
     users = data_manager.get_users()
-    return str(users)
+    return render_template('index.html', users=users)
+
+@app.route('/create_user', methods=['POST'])
+def create_user():
+    new_user = request.form.get('title')
+    data_manager.create_user(new_user)
+    return redirect(url_for('index'))
+
 """
 @app.route('/users/<int:user_id>/movies', methods=['GET']): 
 Wenn du auf einen Nutzernamen klickst, ruft die App die Liste der Lieblingsfilme dieses Nutzers ab und zeigt sie an.

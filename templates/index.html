@@ -12,13 +12,13 @@
             <ul class="user-list">
                 { % for user in users % }
                 <li class="user-entry">
-                    { % for user in users % }
-                    <a href="{{ url_for('get_movies', user_id=user.id }}" class="btn"> {{ user.name }}</a>
+                    {% for user in users %}
+                    <a href="{{ url_for('get_movies', user_id=user.id) }}" class="btn">{{ user.name }}</a>
                 </li>
-            {% endfor %}
+                {% endfor %}
             </ul>
             <form action="{{ url_for('create_user') }}" method='post'>Name</form>
-            <input type="text" name="'name">
+            <input type="text" name="title">
             <button type="submit">Absenden</button>
         </main>`
     </body>
