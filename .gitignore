@@ -12,6 +12,8 @@ env/
 # Logs
 *.log
 
+.env
+
 # Editor
 .vscode/
 .idea/

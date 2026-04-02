@@ -17,3 +17,4 @@ class DataManager():
             return []
         return user.movies
 
+    def add_movie(self, movie):
