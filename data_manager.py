@@ -23,4 +23,8 @@ class DataManager():
         db.session.add(movie)
         db.session.commit()
 
+    def update_movie(self, movie_id, new_title):
+        movie_to_update = Movie.query.get(movie_id)
+        movie_to_update.title = new_title
+        db.session.commit()
 
