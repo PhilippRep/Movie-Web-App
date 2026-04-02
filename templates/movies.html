@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+Movies
+{% endblock %}
+{% block content %}
+<div class="movie-containers">
+    <h1>Movies</h1>
+    <ul class="movie-list">
+        {% for movie in movies %}
+        <li class="movie-entry">
+            {{ movie.title }}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="add-movie-container">
+        <form action="{{ url_for('add_movie', user_id=user_id) }}" method="POST">
+            <h2>Add New Movie</h2>
+            <input type="text" name="new_title" placeholder="Movie title">
+            <button type="submit">Add Movie</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

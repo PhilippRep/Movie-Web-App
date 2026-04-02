@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Title</title>
-</head>
-    <body>
-        <main class="container">
-            {% extends "base.html" %}
-            <h1>Nutzer</h1>
-            <ul class="user-list">
-                { % for user in users % }
-                <li class="user-entry">
-                    {% for user in users %}
-                    <a href="{{ url_for('get_movies', user_id=user.id) }}" class="btn">{{ user.name }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            <form action="{{ url_for('create_user') }}" method='post'>Name</form>
-            <input type="text" name="title">
-            <button type="submit">Absenden</button>
-        </main>`
-    </body>
-</html>
+{% extends "base.html" %}
+{% block title %}
+Users
+{% endblock %}
+{% block content %}
+<h1>Users</h1>
+<ul class="user-list">
+    {% for user in users %}
+    <li class="user-entry">
+        <a href="{{ url_for('get_movies', user_id=user.id) }}" class="btn">
+            {{ user.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+<div class="add-user-container">
+    <form action="{{ url_for('create_user') }}" method="POST">
+        <h2>Add New User</h2>
+        <input type="text" name="title" placeholder="User name">
+        <button type="submit">Absenden</button>
+    </form>
+</div>
+{% endblock %}
