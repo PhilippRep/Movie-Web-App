@@ -7,6 +7,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
 
+    def __repr__(self):
+        return f"User(id = {self.id}, title = {self.name})"
+
 class Movie(db.Model):
     __tablename__ = "movies"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -17,3 +20,5 @@ class Movie(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref='movies')
 
+    def __repr__(self):
+        return f"Movie(id = {self.id}, title = {self.title})"
