@@ -78,27 +78,21 @@ def add_movie(user_id):
     data_manager.add_movie(new_movie)
     return redirect(url_for('list_movies', user_id=user_id))
 
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/update', methods=['POST'])
+def update_titel(user_id, movie_id):
+    """Den Titel eines bestimmten Films in der Liste eines Nutzers ändern,
+    ohne sich auf OMDb für Korrekturen zu verlassen."""
+
 
 
 
 """
 
-
-@app.route('/users/<int:user_id>/movies/<int:movie_id>/update', methods=['POST']): 
-Den Titel eines bestimmten Films in der Liste eines Nutzers ändern, ohne sich auf OMDb für Korrekturen zu verlassen.
-
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST']): 
 Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
-
-
-def main():
-    """controls die programm"""
-    user_wish = input("Which Movie do you want to add? ")
-    get_movie_content(user_wish)
 
 
 if __name__ == '__main__':
   with app.app_context():
     db.create_all()
   app.run()
-  #main()
