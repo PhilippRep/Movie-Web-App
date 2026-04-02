@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Title</title>
+</head>
+    <body>
+        <main class="container">
+            {% extends "base.html" %}
+            <h1>Nutzer</h1>
+            <ul class="user-list">
+                { % for user in users % }
+                <li class="user-entry">
+                    { % for user in users % }
+                    <a href="{{ url_for('get_movies', user_id=user.id }}" class="btn"> {{ user.name }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+            <form action="{{ url_for('create_user') }}" method='post'>Name</form>
+            <input type="text" name="'name">
+            <button type="submit">Absenden</button>
+        </main>`
+    </body>
+</html>

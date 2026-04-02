@@ -45,7 +45,7 @@ def get_movie_content(movie):
     data_manager.add_movie(new_movie)
 
 @app.route('/')
-def home():
+def index():
     """Die Startseite deiner Anwendung. Zeigt eine Liste aller registrierten Nutzer und ein
     Formular zum Hinzufügen neuer Nutzer. (Diese Route verwendet standardmäßig GET."""
     return "Welcome to MovieWeb APP"
@@ -57,6 +57,18 @@ def list_users():
     """
     users = data_manager.get_users()
     return str(users)
+"""
+@app.route('/users/<int:user_id>/movies', methods=['GET']): 
+Wenn du auf einen Nutzernamen klickst, ruft die App die Liste der Lieblingsfilme dieses Nutzers ab und zeigt sie an.
+
+@app.route('/users/<int:user_id>/movies', methods=['POST']): 
+Fügt einen neuen Film zur Favoritenliste eines Nutzers hinzu.
+
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/update', methods=['POST']): 
+Den Titel eines bestimmten Films in der Liste eines Nutzers ändern, ohne sich auf OMDb für Korrekturen zu verlassen.
+
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST']): 
+Entfernt einen bestimmten Film aus der Liste der Lieblingsfilme eines Nutzers."""
 
 
 def main():
