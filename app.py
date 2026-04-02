@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)  # Link the database and the app. This is the reason you need to import db from models
-#data_manager = DataManager() # Create an object of your DataManager class
+data_manager = DataManager() # Create an object of your DataManager class
 
 
 def get_movie_content(movie):
@@ -42,8 +42,21 @@ def get_movie_content(movie):
                        rating=rating,
                        genre=genre,
                        content=content)
-    data_manager = DataManager()
     data_manager.add_movie(new_movie)
+
+@app.route('/')
+def home():
+    """Die Startseite deiner Anwendung. Zeigt eine Liste aller registrierten Nutzer und ein
+    Formular zum Hinzufügen neuer Nutzer. (Diese Route verwendet standardmäßig GET."""
+    return "Welcome to MovieWeb APP"
+
+@app.route('/users', methods=['POST'])
+def list_users():
+    """Wenn der Nutzer das „Nutzer hinzufügen“-Formular abschickt, wird eine POST-Anfrage ausgelöst.
+    Der Server erhält die neuen Nutzerdaten, fügt sie der Datenbank hinzu und leitet dann zurück zu /.
+    """
+    users = data_manager.get_users()
+    return str(users)
 
 
 def main():
@@ -56,4 +69,4 @@ if __name__ == '__main__':
   with app.app_context():
     db.create_all()
   app.run()
-  main()
+  #main()

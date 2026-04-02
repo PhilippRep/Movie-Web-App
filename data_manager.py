@@ -9,7 +9,7 @@ class DataManager():
         db.session.add(new_user)
         db.session.commit()
 
-    def get_user(self):
+    def get_users(self):
         all_users = User.query.all()
         return all_users
 
