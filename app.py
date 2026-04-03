@@ -99,6 +99,21 @@ def delete_user(user_id):
     data_manager.delete_user(user_id)
     return redirect(url_for('index', user_id=user_id))
 
+@app.errorhandler(404)
+def page_not_found(e):
+    app.logger.error(f"Found Error: {e}")
+    return render_template('404.html'), 404
+
+@app.errorhandler(403)
+def no_access(e):
+    app.logger.error(f"Access Error: {e}")
+    return render_template('403.html'), 403
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    app.logger.error(f"Server Error: {e}")
+    return render_template('500.html'), 500
+
 
 if __name__ == '__main__':
   with app.app_context():
