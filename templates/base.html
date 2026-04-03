@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>{% block title %}My App{% endblock %}</title>
+    <title>My Movies App</title>
 </head>
 <body>
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+    <a href="{{ url_for('index') }}" class="home-button">🏠 Home</a>
+    <section class="section">
+        <main class="container">
+            {% block content %}{% endblock %}
+        </main>
+    </section>
 </body>
 </html>

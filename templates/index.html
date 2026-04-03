@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% block title %}
-Users
-{% endblock %}
 {% block content %}
-<h1>Users</h1>
-<ul class="user-list">
-    {% for user in users %}
-    <li class="user-entry">
-        <a href="{{ url_for('list_movies', user_id=user.id) }}" class="btn">
-            {{ user.name }}
-            <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST">
-            <button type="submit" name="delete_user">Delete</button>
-            </form>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+<h1 class="title is-3">Users</h1>
+    <ul class="user-list">
+        <div class="box">
+        {% for user in users %}
+        <li class="user-entry">
+            <a href="{{ url_for('list_movies', user_id=user.id) }}" class="btn">
+                <h3 class="title is-5">{{ user.name }}</h3>
+                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST">
+                <button class="button is-success" type="submit" name="delete_user">Delete</button>
+                </form>
+            </a>
+        </li>
+        {% endfor %}
+        </div>
+    </ul>
 <div class="add-user-container">
     <form action="{{ url_for('create_user') }}" method="POST">
         <h2>Add New User</h2>

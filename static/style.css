@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #e9ece7;
+    color: #1f2a24;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title {
+    color: #3f5f4a;
+}
+
+.home-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #3f5f4a;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.home-button:hover {
+    background: #2f4a3a;
+}
+
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.user-entry {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.user-entry h3 {
+    font-size: 14px;
+    color: #2b2b2b;
+    margin-bottom: 8px;
+}
+
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.movie-entry {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+}
+
+.movie-entry img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.movie-entry p {
+    font-size: 13px;
+    color: #333;
+    margin: 4px 0;
+}
+
+.box,
+.add-user-container,
+.add-movie-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 20px;
+    border: 1px solid #dcdcdc;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 9px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+}
+
+input[type="text"]:focus {
+    outline: 2px solid #b8a16a;
+}
+
+.button {
+    background: #b8a16a !important;
+    color: #fff !important;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.add-user-container button,
+.add-movie-container button {
+    background: #3f5f4a !important;
+    color: #fff !important;
+    padding: 6px 10px;
+    margin-top: 8px;
+}
+
+.add-user-container button:hover,
+.add-movie-container button:hover {
+    background: #2f4a3a !important;
+}
+
+button[name="delete_movie"],
+button[name="delete_user"] {
+    background: #c94f4f !important;
+    color: #fff !important;
+    border: none;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+button[name="delete_movie"]:hover,
+button[name="delete_user"]:hover {
+    background: #a83e3e !important;
+}
+
+.add-user-container,
+.add-movie-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid #dcdcdc;
+    max-width: 400px;
+}
+
+.add-user-container h2,
+.add-movie-container h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.add-user-container form,
+.add-movie-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-user-container input,
+.add-movie-container input {
+    padding: 7px;
+    font-size: 14px;
+}
+
+.add-user-container button,
+.add-movie-container button {
+    padding: 6px 10px;
+    font-size: 13px;
+    margin-top: 0;
+}

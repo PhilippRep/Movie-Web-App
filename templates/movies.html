@@ -1,10 +1,7 @@
 {% extends "base.html" %}
-{% block title %}
-Movies
-{% endblock %}
 {% block content %}
 <div class="movie-containers">
-    <h1>Movies</h1>
+    <h1 class="title is-3">Movies</h1>
     <ul class="movie-list">
         {% for movie in movies %}
         <li class="movie-entry">
