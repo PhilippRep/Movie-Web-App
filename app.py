@@ -5,10 +5,10 @@ from flask import Flask, redirect, render_template, request, url_for
 from dotenv import load_dotenv
 from models import db, Movie
 
+load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 app = Flask(__name__)
-load_dotenv()
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data/movies.db')}"
@@ -26,23 +26,27 @@ def get_movie_content(movie, user_id):
         "apikey": API_KEY,
         "t": movie
     }
-    response = requests.get(url, params=params)
-    movie_content = response.json()
-    title = movie_content['Title']
-    year = int(movie_content['Year'])
-    director = movie_content['Director']
-    poster = movie_content['Poster']
-    rating = float(movie_content['imdbRating'])
-    genre =  movie_content['Genre']
-    content = movie_content['Plot']
-    new_movie = Movie(title=title,
-                       year=year,
-                       director=director,
-                       poster=poster,
-                       rating=rating,
-                       genre=genre,
-                       content=content,
-                       user_id=user_id)
+    try:
+        response = requests.get(url, params=params)
+        movie_content = response.json()
+        title = movie_content['Title']
+        year = int(movie_content['Year'])
+        director = movie_content['Director']
+        poster = movie_content['Poster']
+        rating = float(movie_content['imdbRating'])
+        genre =  movie_content['Genre']
+        content = movie_content['Plot']
+        new_movie = Movie(title=title,
+                           year=year,
+                           director=director,
+                           poster=poster,
+                           rating=rating,
+                           genre=genre,
+                           content=content,
+                           user_id=user_id)
+    except Exception as e:
+        app.logger.error(f"API Fehler: {e}")
+        return None
     return new_movie
 
 @app.route('/')
@@ -59,6 +63,8 @@ def create_user():
     Der Server erhält die neuen Nutzerdaten, fügt sie der Datenbank hinzu und leitet dann zurück zu /.
     """
     new_user = request.form.get('title')
+    if new_user == "" or new_user.strip() == "":
+        return redirect(url_for('index'))
     data_manager.create_user(new_user)
     return redirect(url_for('index'))
 
@@ -76,6 +82,8 @@ def add_movie(user_id):
     """Fügt einen neuen Film zur Favoritenliste eines Nutzers hinzu."""
     response = request.form.get('new_title')
     new_movie = get_movie_content(response, user_id)
+    if not new_movie:
+        return redirect(url_for('list_movies', user_id=user_id))
     data_manager.add_movie(new_movie)
     return redirect(url_for('list_movies', user_id=user_id))
 
@@ -101,7 +109,7 @@ def delete_user(user_id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    app.logger.error(f"Found Error: {e}")
+    app.logger.error(f"404 Not Found: {e}")
     return render_template('404.html'), 404
 
 @app.errorhandler(403)
